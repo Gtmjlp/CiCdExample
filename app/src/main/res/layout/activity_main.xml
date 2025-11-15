@@ -16,7 +16,7 @@
         android:stepSize="1"
         android:padding="0dp"
         android:layout_margin="0dp"
-        android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleX="0.7"
+        android:scaleY="0.7"/>
 
 </RelativeLayout>
