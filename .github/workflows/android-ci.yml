@@ -2,7 +2,7 @@ name: Android CI (Build Only)
 
 on:
   push:
-    branches: [ "main", "master" ]
+    branches: [ "master" ]
 
 jobs:
   build:
@@ -21,10 +21,15 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
 
+      - name: Install Android SDK
+        uses: android-actions/setup-android@v3
+        with:
+          sdk-platform: "android-34"
+
       - name: Grant Gradle permission
         run: chmod +x ./gradlew
 
-      - name: Build Debug APK (no tests)
+      - name: Build Debug APK
         run: ./gradlew assembleDebug
 
       - name: Upload APK artifact
