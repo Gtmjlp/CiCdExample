@@ -27,19 +27,22 @@ jobs:
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
-
-      - name: Send Email with APK
+        
+      - name: Send Email with Download Link
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
           server_port: 465
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "New Debug APK Build"
-          to: "gautamj383@gmail.com"       # change receiver email
+          subject: "New Debug APK Build Available"
+          to: "gautamj383@gmail.com"
           from: "${{ secrets.SMTP_USERNAME }}"
-          body: "Hello, please find the latest debug build APK attached."
-          attachments: app/build/outputs/apk/debug/app-debug.apk
+          body: |
+            Hello,
+            A new debug build is ready.
+            Download here:
+            https://nightly.link/${{ github.repository }}/actions/runs/${{ github.run_id }}/app-debug.zip
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
