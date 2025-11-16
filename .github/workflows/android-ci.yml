@@ -1,4 +1,4 @@
-name: Android CI (Build Only)
+name: Android CI (Manual Build With Email)
 
 on:
   workflow_dispatch:
@@ -27,6 +27,19 @@ jobs:
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Send Email with APK
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_USERNAME }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "New Debug APK Build"
+          to: "gautamj383@gmail.com"       # change receiver email
+          from: "${{ secrets.SMTP_USERNAME }}"
+          body: "Hello, please find the latest debug build APK attached."
+          attachments: app/build/outputs/apk/debug/app-debug.apk
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
