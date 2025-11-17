@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.SMTP_USERNAME }}
           password: ${{ secrets.SMTP_PASSWORD }}
           subject: "New Debug APK Build Available"
-          to: "gautamj383@gmail.com"
+          to: "gautamj383@gmail.com, gautamj383@gmail.com"
           from: "${{ secrets.SMTP_USERNAME }}"
           body: |
             Hello,
